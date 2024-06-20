@@ -1,0 +1,47 @@
+type Query {
+    pets: [Pet]
+    petsByFilter(filter:PetFilter): [Pet]
+    checkPetEligibility(id: ID!): Boolean
+}
+
+type Mutation {
+    newPet(newPet: NewPet!): Pet
+    newPetOwner(newPetOwner: NewPetOwner!): PetOwner
+}
+
+input PetFilter {
+    weightUnder: Float
+    vaccinated: Boolean
+    notBreed: String
+    levelEqualsOrGreater: Int
+}
+
+input NewPet {
+    name: String!
+    breed: String!
+    weight: Float!
+    vaccinated: Boolean!
+    level: Int!
+}
+
+type Pet {
+    id: ID
+    name: String!
+    breed: String!
+    weight: Float!
+    vaccinated: Boolean!
+    level: Int!
+}
+
+input NewPetOwner {
+    name: String!
+    lastName: String!
+    petIds: [ID!]!
+}
+
+type PetOwner {
+    id: ID
+    name: String!
+    lastName: String!
+    pets: [Pet!]!
+}
